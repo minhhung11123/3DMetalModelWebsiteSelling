@@ -1,0 +1,40 @@
+﻿@model Models.EF.Account
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="register_account">
+    <div class="wrap">
+        <h4 class="title">Đăng ký tài khoản</h4>
+        @using (Html.BeginForm("Create", "Register", FormMethod.Post))
+        {
+            <div class="col_1_of_2 span_1_of_2">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Họ tên" } })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "Tài khoản" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "E-mail" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "Mật khẩu" } })
+            </div>
+            <div class="col_1_of_2 span_1_of_2">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @placeholder = "Địa chỉ" } })
+                @Html.DropDownListFor(model => model.Country, new List<SelectListItem>()
+                {
+                    new SelectListItem(){Selected = true, Text = "Việt Nam", Value = "Việt Nam"},
+                    new SelectListItem(){Selected = false, Text = "Singapo", Value = "Singapo"},
+                    new SelectListItem(){Selected = false, Text = "Lào", Value = "Lào"},
+                    new SelectListItem(){Selected = false, Text = "Thái Lan", Value = "Thái Lan"},
+                    new SelectListItem(){Selected = false, Text = "Mianma", Value = "Mianma"},
+                    new SelectListItem(){Selected = false, Text = "Malaysia", Value = "Malaysia"},
+                    new SelectListItem(){Selected = false, Text = "Nhật Bản", Value = "Nhật Bản"}
+                }, new { @class = "frm-field required"})
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @placeholder = "Thành phố" } })
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @placeholder = "Số điện thoại" } })
+            </div>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "Vui lòng nhập đầy đủ thông tin.", new { @class = "alert alert-danger" })
+            <button type="submit" class="grey">Xác nhận</button>
+            <div class="clear"></div>
+        }
+    </div>
+</div>

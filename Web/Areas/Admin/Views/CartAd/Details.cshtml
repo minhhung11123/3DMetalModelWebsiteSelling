@@ -1,0 +1,46 @@
+﻿@model List<Models.EF.OrderDetail>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Chi tiết đơn hàng
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options="{
+        &quot;paging&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;filtering&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;sorting&quot;: {
+          &quot;enabled&quot;: true
+        }}">
+                <thead>
+                    <tr>
+                        <th data-breakpoints="xs">Mã sản phẩm</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Số lượng</th>
+                        <th>Giá tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-expanded="true">
+                            <td>@item.ProductID</td>
+                            <td>@item.OrderID</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a style="margin-left:1250px">Tổng tiền: @Model.Sum(x=>x.Price).Value.ToString("N0")</a>
+        </div>
+    </div>
+</div>

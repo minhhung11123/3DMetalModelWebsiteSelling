@@ -1,0 +1,147 @@
+﻿@model Models.EF.Product
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var productTop = (List<Models.EF.Product>)ViewBag.ProductTop;
+}
+
+<!-- Include the Etalage files -->
+    <link rel="stylesheet" href="~/Assets/admin/css/etalage.css">
+    <script src="~/Assets/admin/js/jquery.etalage.min.js"></script>
+    <!-- Include the Etalage files -->
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 300,
+                thumb_image_height: 400,
+
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+            // This is for the dropdown list example:
+            $('.dropdownlist').change(function () {
+                etalage_show($(this).find('option:selected').attr('class'));
+            });
+
+        });
+    </script>
+    <!----//details-product-slider--->
+    <div class="single">
+        <div class="wrap">
+            <div class="rsidebar span_1_of_left">
+                <section class="sky-form">
+                    <h4>Giá tiền</h4>
+                    <div class="row row1 scroll-pane">
+                        <div class="col col-4">
+                            <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Dưới 100,000 ₫</label>
+                        </div>
+                        <div class="col col-4">
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 100,000 đến 300,000 ₫</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 300,000 đến 500,000 ₫</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Từ 500,000 đến 1,000,000 ₫</label>
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Trên 1,000,000 ₫</label>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="cont span_2_of_3">
+                <div class="labout span_1_of_a1">
+                    <!-- start product_slider -->
+                    <ul id="etalage">
+                        <li>
+                            <a href="optionallink.html">
+                                <img class="etalage_thumb_image" src="@Model.Image" />
+                                <img class="etalage_source_image" src="@Model.Image" />
+                            </a>
+                        </li>
+                    </ul>
+
+
+                    <!-- end product_slider -->
+                </div>
+                <div class="cont1 span_2_of_a1">
+                    <h3 class="m_3">@Model.Name</h3>
+                    <div class="price_single">
+                        <span class="actual">@(Model.Price.HasValue?Model.Price.Value.ToString("N0")+ " ₫" : "Liên hệ")</span>
+                    </div>
+                    <div class="btn_form">
+                        <form>
+                            <a href="/them-gio-hang?productID=@Model.ID&quantity=1">Thêm vào giỏ </a>
+                        </form>
+                    </div>
+                    <ul class="add-to-links">
+                        <li><img src="~/Assets/admin/images/wish.png" alt="" /><a href="#">Thêm vào yêu thích</a></li>
+                    </ul>
+                    <p class="m_desc">@Model.Name</p>
+
+                    <div class="social_single">
+                        <ul>
+                            <li class="fb"><a href="#"><span> </span></a></li>
+                            <li class="tw"><a href="#"><span> </span></a></li>
+                            <li class="g_plus"><a href="#"><span> </span></a></li>
+                            <li class="rss"><a href="#"><span> </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <ul id="flexiselDemo3">
+                    @foreach (var item in productTop)
+                    {
+                        <li><img src="@item.Image" /><div class="grid-flex"><a href="#">@item.Code</a></div></li>
+                    }
+                </ul>
+                <script type="text/javascript">
+                    $(window).load(function () {
+                        $("#flexiselDemo1").flexisel();
+                        $("#flexiselDemo2").flexisel({
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint: 480,
+                                    visibleItems: 1
+                                },
+                                landscape: {
+                                    changePoint: 640,
+                                    visibleItems: 2
+                                },
+                                tablet: {
+                                    changePoint: 768,
+                                    visibleItems: 3
+                                }
+                            }
+                        });
+
+                        $("#flexiselDemo3").flexisel({
+                            visibleItems: 5,
+                            animationSpeed: 1000,
+                            autoPlay: true,
+                            autoPlaySpeed: 3000,
+                            pauseOnHover: true,
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint: 480,
+                                    visibleItems: 1
+                                },
+                                landscape: {
+                                    changePoint: 640,
+                                    visibleItems: 2
+                                },
+                                tablet: {
+                                    changePoint: 768,
+                                    visibleItems: 3
+                                }
+                            }
+                        });
+
+                    });
+                </script>
+                <script type="text/javascript" src="~/Assets/admin/js/jquery.flexisel.js"></script>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+

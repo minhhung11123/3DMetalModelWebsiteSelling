@@ -1,0 +1,60 @@
+﻿@model List<Models.EF.Account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách tài khoản
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options="{
+        &quot;paging&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;filtering&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;sorting&quot;: {
+          &quot;enabled&quot;: true
+        }}">
+                <thead>
+                    <tr>
+                        <th data-breakpoints="xs">ID</th>
+                        <th>Tài khoản</th>
+                        <th>Mật khẩu</th>
+                        <th>Họ tên</th>
+                        <th>Địa chỉ</th>
+                        <th>Thành phố</th>
+                        <th>Quốc gia</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Loại</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var urlEdit = "/Edit/" + item.ID;
+                        <tr data-expanded="true">
+                            <td>@item.ID</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Password</td>
+                            <td>@item.Name</td>
+                            <td>@item.Address</td>
+                            <td>@item.City</td>
+                            <td>@item.Country</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
+                            <td>@(item.Type.GetValueOrDefault(false)?"Admin":"Khách hàng")</td>
+                            <td>@Html.ActionLink("Sửa", urlEdit)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

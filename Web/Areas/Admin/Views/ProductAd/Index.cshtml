@@ -1,0 +1,62 @@
+﻿@model List<Models.EF.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách sản phẩm
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options="{
+        &quot;paging&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;filtering&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;sorting&quot;: {
+          &quot;enabled&quot;: true
+        }}">
+                <thead>
+                    <tr>
+                        <th data-breakpoints="xs">ID</th>
+                        <th>Tên</th>
+                        <th>Mã</th>
+                        <th>Miêu tả</th>
+                        <th>Đường dẫn hình</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Mã loại</th>
+                        <th>Người tạo</th>
+                        <th data-breakpoints="xs">Ngày tạo</th>
+                        <th data-breakpoints="xs sm md" data-title="DOB">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var urlEdit = "/Edit/"+ item.ID;
+                        <tr data-expanded="true">
+                            <td>@item.ID</td>
+                            <td>@item.Name</td>
+                            <td>@item.Code</td>
+                            <td>@item.Description</td>
+                            <td>@item.Image</td>
+                            <td>@item.Price.Value.ToString("N0")₫</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.CategoryID</td>   
+                            <td>@item.CreatedBy</td>
+                            <td>@(item.CreatedDate.HasValue?item.CreatedDate.Value.ToString("dd/MM/yyyy"):"")</td>
+                            <td>@(item.Status.GetValueOrDefault(false)?"Hoạt động":"Khóa")</td>
+                            <td>@Html.ActionLink("Sửa", urlEdit)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

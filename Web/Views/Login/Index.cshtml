@@ -1,0 +1,45 @@
+﻿ 
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Web.Areas.Admin.Models.LoginModel
+
+<div class="login">
+    <div class="wrap">
+        <div class="col_1_of_login span_1_of_login">
+            <h4 class="title">Bạn là khách hàng mới</h4>
+            <h5 class="sub_title">Đăng ký tài khoản</h5>
+            <div class="button1">
+                <a href="@Url.Action("Create", "Register")"><input type="submit" name="Submit" value="Tiếp tục"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="col_1_of_login span_1_of_login">
+            <div class="login-title">
+                <h4 class="title">Đăng nhập</h4>
+                <div class="comments-area">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                        <p>
+                            <label>Tài khoản</label>
+                            <span>*</span>
+                            @Html.TextBoxFor(model => model.UserName, new { @autofocus = "autofocus" })
+                        </p>
+                        <p>
+                            <label>Mật khẩu</label>
+                            <span>*</span>
+                            @Html.TextBoxFor(model => model.Password, new { @autofocus = "autofocus", @type = "password" })
+                        </p>
+                        <p>
+                            <input type="submit" value="Đăng nhập">
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

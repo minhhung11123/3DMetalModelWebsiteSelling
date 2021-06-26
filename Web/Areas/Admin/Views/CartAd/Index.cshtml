@@ -1,0 +1,57 @@
+﻿@model List<Models.EF.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            DANH SÁCH ĐƠN HÀNG
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options="{
+        &quot;paging&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;filtering&quot;: {
+          &quot;enabled&quot;: true
+        },
+        &quot;sorting&quot;: {
+          &quot;enabled&quot;: true
+        }}">
+                <thead>
+                    <tr>
+                        <th data-breakpoints="xs">ID</th>
+                        <th>Ngày tạo</th>
+                        <th>ID khách hàng</th>
+                        <th>Tên người nhận</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr data-expanded="true">
+                            <td>@item.ID</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.CustomerID</td>
+                            <td>@item.ShipName</td>
+                            <td>@item.ShipAddress</td>
+                            <td>@item.ShipMobie</td>
+                            <td>@item.ShipEmail</td>
+                            <td>@(item.Status.GetValueOrDefault(0)>0?"Đã xác nhận":"Chưa xác nhận")</td>
+                            <td><a href="@Url.Action("Details", "CartAd", new { item.ID })">Xem</a></td>
+                            <td><a href="@Url.Action("Confirm", "CartAd", new { item.ID })">@(item.Status.GetValueOrDefault(0) > 0 ? "" : "Xác nhận")</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

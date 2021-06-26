@@ -1,0 +1,242 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Mô hình lắp ghép</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Assets/admin/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Assets/admin/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="~/Assets/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Assets/admin/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="~/Assets/admin/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/Assets/admin/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
+    <!-- start menu -->
+    <link href="~/Assets/admin/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Assets/admin/js/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <!-- end menu -->
+    <!-- top scrolling -->
+    <script type="text/javascript" src="~/Assets/admin/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Assets/admin/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="header-top">
+        <div class="wrap">
+            <div class="logo">
+                <a href="@Url.Action("Index", "Home")"><img src="~/Assets/admin/images/loga.png" alt="" /></a>
+            </div>
+            <div class="cssmenu">
+                <ul>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    @if (Session["USER_SESSION"] == null)
+                    {
+                        <li class="active"><a href="@Url.Action("Create", "Register")">Đăng kí</a></li>
+                        <li><a href="@Url.Action("Index", "Login")">Tài khoản</a></li>
+                        <li><a href="@Url.Action("Index", "Cart")">Giỏ hàng</a></li>
+                    }
+                    else
+                    {
+                        <li><a>Xin chào: @Session["USER_SESSION"]</a></li>
+                        <li><a href="@Url.Action("Index", "Cart")">Giỏ hàng</a></li>
+                        <li><a href="@Url.Action("Index", "Login")">Đăng xuất</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="wrap">
+            <!-- start header menu -->
+            <ul class="megamenu skyblue">
+                <li><a class="color1" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li class="grid">
+                    <a class="color2" href="#">Thể loại</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Thể loại</h4>
+                                    <ul>
+                                        <li><a href="/san-pham/kien-truc-1">Kiến trúc thế giói</a></li>
+                                        <li><a href="/san-pham/xe-tang-2">Xe tăng chiến đấu</a></li>
+                                        <li><a href="/san-pham/may-bay-3">Máy bay chiến đấu</a></li>
+                                        <li><a href="/san-pham/khung-long-4">Khủng long - Rồng</a></li>
+                                        <li><a href="/san-pham/xe-5">Xe</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="active grid">
+                    <a class="color4" href="#">Chủ đề</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Chủ đề</h4>
+                                    <ul>
+                                        <li><a href="/san-pham/co-khi-6">Cơ khí chuyển động</a></li>
+                                        <li><a href="/san-pham/nha-7">Nhà tí hon</a></li>
+                                        <li><a href="/san-pham/cuop-bien-8">Cướp biển Caribbean</a></li>
+                                        <li><a href="/san-pham/transformers-9">Transformers</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="footer">
+        <div class="footer-top">
+            <div class="wrap">
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="images/f_icon.png" alt="" /><span class="delivery">Miễn phí vận chuyển đối với đơn hàng trên 800.000₫</span></li>
+                    </ul>
+                </div>
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="images/f_icon1.png" alt="" /><span class="delivery">Dịch vụ khách hàng:<span class="orange"> (800) 000-2587 (miễn phí)</span></span></li>
+                    </ul>
+                </div>
+                <div class="col_1_of_footer-top span_1_of_footer-top">
+                    <ul class="f_list">
+                        <li><img src="images/f_icon2.png" alt="" /><span class="delivery">Phục vụ nhiệt tình và nhanh chóng</span></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div class="wrap">
+                <div class="section group">
+                    <div class="col_1_of_middle span_1_of_middle">
+                    </div>
+                    <div class="col_1_of_middle span_1_of_middle">
+                        <ul class="f_list1">
+                            <li>
+                                <span class="m_8">Nhận thông tin mới nhất:</span>
+                                <div class="search">
+                                    <input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                                    <input type="submit" value="Subscribe" id="submit" name="submit">
+                                    <div id="response"> </div>
+                                </div><div class="clear"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="section group">
+                    <div class="col_1_of_5 span_1_of_5">
+                        
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <h3 class="m_9">Hỗ trợ</h3>
+                        <ul class="list1">
+                            <li><a href="#">Vận chuyển</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col_1_of_5 span_1_of_5">
+                        <h3 class="m_9">Liên hệ</h3>
+                        <ul class="sub_list2">
+                            <li><a href="@Url.Action("Index", "About")">Về chúng tôi</a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
